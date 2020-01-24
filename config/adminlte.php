@@ -185,7 +185,6 @@ return [
         ],
         [
             'text' => 'Data Master',
-            'url'  => 'admin/settings',
             'icon' => 'nav-icon fas fa-fw fa-lock',
             'submenu' => [
                 [
@@ -195,8 +194,12 @@ return [
                 ],
                 [
                     'text' => 'Penerbit',
-                    'url'  => 'admin/settings',
+                    'url'  => 'publishers',
                     'icon' => 'nav-icon fas fa-fw fa-lock',
+                    'active' => [
+                        'publishers',
+                        'publishers/*'
+                    ],
                 ],
                 [
                     'text' => 'Buku',
