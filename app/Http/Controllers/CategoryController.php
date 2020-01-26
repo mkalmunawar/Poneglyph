@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Publisher;
+use App\Category;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class PublisherController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,8 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        $publishers = Publisher::all();
-
-        return view('publisher.index', compact('publishers'));
+        $categories = Category::all();
+        return view('category.index', compact('categories'));
     }
 
     /**
@@ -27,7 +26,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        return view('publisher.create');
+        return view('category.create');
     }
 
     /**
@@ -38,11 +37,10 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        $publisher = new Publisher;
-        $publisher->name = $request->name;
-        $publisher->save();
-
-        return redirect('publishers');
+        $category = new Category;
+        $category->name = $request->name;
+        $category->save();
+        return redirect('categories');
     }
 
     /**
@@ -64,9 +62,8 @@ class PublisherController extends Controller
      */
     public function edit($id)
     {
-        $publisher = Publisher::find($id);
-
-        return view('publisher.edit', compact('publisher'));
+        $category = Category::find($id);
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -78,11 +75,10 @@ class PublisherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $publisher = Publisher::find($id);
-        $publisher->name = $request->name;
-        $publisher->save();
-
-        return redirect('publishers');
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->save();
+        return redirect('categories');
     }
 
     /**
@@ -93,22 +89,22 @@ class PublisherController extends Controller
      */
     public function destroy($id)
     {
-        $publisher = Publisher::find($id);
-        $publisher->delete();
-        
-        return redirect('publishers');
+        $category = Category::find($id);
+        $category->delete();
+        return redirect('categories');
     }
 
-    public function publisherData(){
-        return DataTables::of(Publisher::all())
-        ->addColumn('action', function($publisher){
+    public function categoryData()
+    {
+        return DataTables::of(Category::all())
+        ->addColumn('action', function($category){
             $csrf = csrf_token();
             return '
-            <a href="/publishers/' . $publisher->id . '/edit" class="btn btn-sm btn-default">
+            <a href="/categories/' . $category->id . '/edit" class="btn btn-sm btn-default">
                 <i class="far fa-edit"></i>Ubah
             </a>
         
-            <button type="button" class="btn btn-sm btn-default delete" id="' . $publisher->id . '">
+            <button type="button" class="btn btn-sm btn-default delete" id="' . $category->id . '">
                 <i class="fas fa-trash"></i> Hapus
             </button>';
 

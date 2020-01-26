@@ -1,21 +1,21 @@
 @extends('adminlte::page')
 
-@section('title', 'Tambah Penerbit')
+@section('title', 'Kategori')
 
 @section('content_header')
-    <h1 class="text-dark">Penerbit</h1>
+    <h1 class="text-dark">Kategori</h1>
 @endsection
 
 @section('content')
     
     <div class="card">
         <div class="card-body">
-            <a class="btn btn-primary mb-3" href="/publishers/create" role="button">Tambah Penerbit</a>
-            <table class="table table-striped" id="publishers-table">
+            <a class="btn btn-primary mb-3" href="/categories/create" role="button">Tambah Kategori</a>
+            <table class="table table-striped" id="categories-table">
                 <thead class="bg-dark">
                     <tr>
                         <th>No</th>
-                        <th>Nama Penerbit</th>
+                        <th>Nama Kategori</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -27,13 +27,13 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Hapus Penerbit</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Hapus Kategori</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                Data Penerbit Akan Terhapus Permanen
+                Data Kategori Akan Terhapus Permanen
             </div>
             <div class="modal-footer">
             <form action="" method="POST" id="myForm">
@@ -58,11 +58,11 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
     <script type="text/javascript">
         $(function() {
-            var oTable = $('#publishers-table').DataTable({
+            var oTable = $('#categories-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ url("publishers-data") }}'
+                    url: '{{ url("categories-data") }}'
                 },
                 columns: [
                 {
@@ -75,9 +75,9 @@
             ],
             });
 
-            $('#publishers-table').DataTable().on('click' , 'button.delete' , function(){
+            $('#categories-table').DataTable().on('click' , 'button.delete' , function(){
               var id = $(this).attr('id');
-              $('#myForm').attr('action' , '/publishers/'+id);
+              $('#myForm').attr('action' , '/categories/'+id);
               $('#delete-modal').modal('show')
             });
 

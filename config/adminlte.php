@@ -189,7 +189,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Kategori',
-                    'url'  => 'admin/settings',
+                    'url'  => 'categories',
                     'icon' => 'nav-icon fas fa-fw fa-lock',
                 ],
                 [
