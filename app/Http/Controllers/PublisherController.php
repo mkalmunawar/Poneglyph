@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Publisher;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class PublisherController extends Controller
 {
@@ -87,5 +88,22 @@ class PublisherController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function publisherData(){
+        return DataTables::of(Publisher::all())
+        ->addColumn('action', function($publisher){
+            $csrf = csrf_token();
+            return '
+            <a href="/db-assessment/companies/' . $publisher->id . '/edit" class="btn btn-sm btn-default">
+                <i class="far fa-edit"></i>Ubah
+            </a>
+        
+            <button type="button" class="btn btn-sm btn-default delete" id="' . $publisher->id . '">
+                <i class="fas fa-trash"></i> Hapus
+            </button>';
+
+        })
+        ->make(true);
     }
 }
