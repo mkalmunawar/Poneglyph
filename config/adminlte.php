@@ -203,7 +203,7 @@ return [
                 ],
                 [
                     'text' => 'Buku',
-                    'url'  => 'admin/settings',
+                    'url'  => 'books',
                     'icon' => 'nav-icon fas fa-fw fa-book',
                 ],
 
