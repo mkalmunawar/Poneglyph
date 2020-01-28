@@ -13,7 +13,12 @@
                 <div class="form-group">
                     <label for="name">Nama Penerbit</label>
                     <input type="text"
-                    class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="Nama Penerbit" value="{{$publisher->name}}">
+                    class="form-control" name="name" id="name" placeholder="Nama Penerbit" value="{{$publisher->name}}">
+                </div>
+                <div class="form-group">
+                    <label for="city">Asal Kota</label>
+                    <input type="text"
+                    class="form-control" name="city" id="city" placeholder="Asal Kota" value="{{$publisher->city}}">
                 </div>
                 <div style="text-align : right">
                     <a class="btn btn-default" href="/publishers" role="button">Kembali</a>

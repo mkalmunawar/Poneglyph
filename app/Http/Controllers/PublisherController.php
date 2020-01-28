@@ -40,6 +40,7 @@ class PublisherController extends Controller
     {
         $publisher = new Publisher;
         $publisher->name = $request->name;
+        $publisher->city = $request->city;
         $publisher->save();
 
         return redirect('publishers');
@@ -80,6 +81,7 @@ class PublisherController extends Controller
     {
         $publisher = Publisher::find($id);
         $publisher->name = $request->name;
+        $publisher->city = $request->city;
         $publisher->save();
 
         return redirect('publishers');

@@ -16,6 +16,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Penerbit</th>
+                        <th>Kota</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -71,6 +72,7 @@
                     }
                 },
                 {data: 'name', name: 'name'},
+                {data: 'city', name: 'city'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
             });
