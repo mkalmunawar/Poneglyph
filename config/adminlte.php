@@ -206,6 +206,11 @@ return [
                     'url'  => 'books',
                     'icon' => 'nav-icon fas fa-fw fa-book',
                 ],
+                [
+                    'text' => 'Pegawai',
+                    'url'  => 'employees',
+                    'icon' => 'nav-icon fas fa-fw fa-user',
+                ],
 
             ]
         ],

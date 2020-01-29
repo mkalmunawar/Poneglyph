@@ -19,11 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware(['auth'])->group(function(){
+    Route::resource('/publishers', 'PublisherController');
+    Route::resource('/categories', 'CategoryController');
+    Route::resource('/books', 'BookController');
 });
 
-Route::resource('/publishers', 'PublisherController');
-Route::resource('/categories', 'CategoryController');
-Route::resource('/books', 'BookController');
 Route::get('/publishers-data', 'PublisherController@publisherData');
 Route::get('/categories-data', 'CategoryController@categoryData');
 Route::get('/books-data', 'BookController@bookData');
