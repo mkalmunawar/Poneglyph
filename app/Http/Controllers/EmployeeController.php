@@ -43,17 +43,21 @@ class EmployeeController extends Controller
         $employees = new Employee;
         $users = new User();
 
+        $users->name = $request->name;
         $users->email = $request->email;
         $users->password = Hash::make($request->password);
-        
+        $users->save();
+
         $employees->nip = $request->nip;
         $employees->name = $request->name;
         $employees->address = $request->address;
         $employees->birth_date = $request->birth_date;
-        $employees->user_id = $request->id;
+        $employees->user_id = $users->id;
 
-        if ($employees->save() && $users->save()) {
+        if ($employees->save()) {
             return redirect('employees');
+        } else{
+            return $request;
         }
     }
 

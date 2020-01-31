@@ -185,17 +185,17 @@ return [
         ],
         [
             'text' => 'Data Master',
-            'icon' => 'nav-icon fas fa-fw fa-lock',
+            'icon' => 'nav-icon fas fa-fw fa-database',
             'submenu' => [
                 [
                     'text' => 'Kategori',
                     'url'  => 'categories',
-                    'icon' => 'nav-icon fas fa-fw fa-lock',
+                    'icon' => 'nav-icon fas fa-fw fa-highlighter',
                 ],
                 [
                     'text' => 'Penerbit',
                     'url'  => 'publishers',
-                    'icon' => 'nav-icon fas fa-fw fa-lock',
+                    'icon' => 'nav-icon fas fa-fw fa-pen',
                     'active' => [
                         'publishers',
                         'publishers/*'
@@ -205,13 +205,27 @@ return [
                     'text' => 'Buku',
                     'url'  => 'books',
                     'icon' => 'nav-icon fas fa-fw fa-book',
+                    'active' => [
+                        'books',
+                        'books/*'
+                    ],
                 ],
+
+            ]
+        ],
+        [
+            'text' => 'Data User',
+            'icon' => 'nav-icon fas fa-fw fa-users',
+            'submenu' => [
                 [
                     'text' => 'Pegawai',
                     'url'  => 'employees',
-                    'icon' => 'nav-icon fas fa-fw fa-user',
+                    'icon' => 'nav-icon fa fa-fw fa-user-tie',
+                    'active' => [
+                        'employees',
+                        'employees/*'
+                    ],
                 ],
-
             ]
         ],
     ],
