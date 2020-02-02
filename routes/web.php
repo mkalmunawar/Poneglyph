@@ -23,9 +23,11 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/categories', 'CategoryController');
     Route::resource('/books', 'BookController');
     Route::resource('/employees', 'EmployeeController');
+    Route::resource('/members', 'MemberController');
 });
 
 Route::get('/publishers-data', 'PublisherController@publisherData');
 Route::get('/categories-data', 'CategoryController@categoryData');
 Route::get('/books-data', 'BookController@bookData');
 Route::get('/employees-data', 'EmployeeController@employeeData');
+Route::get('/members-data', 'MemberController@memberData');

@@ -174,16 +174,6 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
             'text' => 'Data Master',
             'icon' => 'nav-icon fas fa-fw fa-database',
             'submenu' => [
@@ -224,6 +214,15 @@ return [
                     'active' => [
                         'employees',
                         'employees/*'
+                    ],
+                ],
+                [
+                    'text' => 'Anggota',
+                    'url'  => 'members',
+                    'icon' => 'nav-icon fa fa-fw fa-user',
+                    'active' => [
+                        'members',
+                        'members/*'
                     ],
                 ],
             ]

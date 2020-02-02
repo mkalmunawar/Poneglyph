@@ -41,11 +41,12 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $employees = new Employee;
-        $users = new User();
+        $users = new User;
 
         $users->name = $request->name;
         $users->email = $request->email;
         $users->password = Hash::make($request->password);
+        $users->role = 'staff';
         $users->save();
 
         $employees->nip = $request->nip;
@@ -97,6 +98,7 @@ class EmployeeController extends Controller
 
         $users->email = $request->email;
         $users->password = Hash::make($request->password);
+        $users->role = 'staff';
         $users->save();
         
         $employees->nip = $request->nip;
