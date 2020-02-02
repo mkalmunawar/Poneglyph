@@ -56,8 +56,6 @@ class EmployeeController extends Controller
 
         if ($employees->save()) {
             return redirect('employees');
-        } else{
-            return $request;
         }
     }
 
@@ -80,7 +78,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $employees = Employee::find($id);
+        $employees = Employee::with('user')->find($id);
 
         return view('employee.edit', compact('employees'));
     }
@@ -99,14 +97,15 @@ class EmployeeController extends Controller
 
         $users->email = $request->email;
         $users->password = Hash::make($request->password);
+        $users->save();
         
         $employees->nip = $request->nip;
         $employees->name = $request->name;
         $employees->address = $request->address;
         $employees->birth_date = $request->birth_date;
-        $employees->user_id = $request->id;
+        $employees->user_id = $users->id;
 
-        if ($employees->save() && $users->save()) {
+        if ($employees->save()) {
             return redirect('employees');
         }
 

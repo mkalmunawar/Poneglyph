@@ -83,7 +83,7 @@
 
             $('#employees-table').DataTable().on('click' , 'button.delete' , function(){
               var id = $(this).attr('id');
-              $('#myForm').attr('action' , '/books/'+id);
+              $('#myForm').attr('action' , '/employees/'+id);
               $('#delete-modal').modal('show')
             });
 
