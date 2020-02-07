@@ -227,6 +227,15 @@ return [
                 ],
             ]
         ],
+        [
+            'text' => 'Catalog',
+            'url'  => 'catalogs',
+            'icon' => 'nav-icon fas fa-fw fa-shopping-cart',
+            'active' => [
+                'catalogs',
+                'catalogs/*'
+            ],
+        ],
     ],
 
     /*

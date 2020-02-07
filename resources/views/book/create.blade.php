@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form action="/books" method="POST">
+            <form action="/books" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                   <label for="isbn">ISBN</label>

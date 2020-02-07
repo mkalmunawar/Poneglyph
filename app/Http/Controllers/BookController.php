@@ -151,6 +151,12 @@ class BookController extends Controller
         return redirect('books');
     }
 
+    public function catalog(){
+        $books = Book::with('category', 'publisher')->get();
+
+        return view('book.catalog', compact('books'));
+    }
+
     public function bookData()
     {
         return DataTables::of(Book::with('publisher')->with('category')->get())

@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/books', 'BookController');
     Route::resource('/employees', 'EmployeeController');
     Route::resource('/members', 'MemberController');
+    Route::get('/catalogs', 'BookController@catalog');
 });
 
 Route::get('/publishers-data', 'PublisherController@publisherData');
