@@ -13,4 +13,7 @@ class Book extends Model
     public function publisher(){
         return $this->belongsTo('App\Publisher');
     }
+    public function detailBorrow(){
+        return $this->hasMany('App\DetailBorrowingBook');
+    }
 }

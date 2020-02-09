@@ -3,10 +3,11 @@
 @section('title', 'Katalog')
 
 @section('content_header')
-    <h1 class="text-dark">Catalog</h1>
+    <h1 class="text-dark">Catalog Buku</h1>
 @endsection
 
 @section('content')
+    <a class="btn btn-primary mb-3" href="/borrows/create" role="button">Pinjam Buku</a>
     @foreach ($books as $book)
         <div class="card">
             <div class="card-body">
