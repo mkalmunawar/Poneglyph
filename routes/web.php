@@ -33,3 +33,5 @@ Route::get('/categories-data', 'CategoryController@categoryData');
 Route::get('/books-data', 'BookController@bookData');
 Route::get('/employees-data', 'EmployeeController@employeeData');
 Route::get('/members-data', 'MemberController@memberData');
+Route::get('/members-data-by-student/{id}', 'BorrowController@memberData');
+Route::get('/books-data-by-isbn/{id}', 'BorrowController@bookData');

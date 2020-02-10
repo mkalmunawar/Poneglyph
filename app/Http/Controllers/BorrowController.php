@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use App\Employee;
+use App\Members;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,8 +28,10 @@ class BorrowController extends Controller
     public function create()
     {
         $employees = Employee::where('user_id', Auth::user()->id)->get();
+        $members = Members::all();
+        $books = Book::all();
 
-        return view('borrow.create', compact('employees'));
+        return view('borrow.create', compact('employees', 'members', 'books'));
     }
 
     /**
@@ -84,5 +88,13 @@ class BorrowController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function memberData($id){
+        return Members::where('student_id', $id)->get();
+    }
+
+    public function bookData($isbn){
+        return Book::where('isbn', $isbn)->get();
     }
 }

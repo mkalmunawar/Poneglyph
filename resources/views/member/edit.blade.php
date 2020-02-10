@@ -11,6 +11,11 @@
                 @method('put')
                 @csrf
                 <div class="form-group">
+                    <label for="student_id">NRP</label>
+                    <input type="text"
+                    class="form-control" name="student_id" id="student_id" placeholder="Masukan NRP" value="{{$members->student_id}}">
+                </div>
+                <div class="form-group">
                     <label for="name">Nama Anggota</label>
                     <input type="text"
                     class="form-control" name="name" id="name" placeholder="Nama Pegawai" value="{{$members->name}}">

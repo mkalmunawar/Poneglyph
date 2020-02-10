@@ -49,7 +49,8 @@ class MemberController extends Controller
         $users->password = Hash::make($request->password);
         $users->role = 'member';
         $users->save();
-
+        
+        $members->student_id = $request->student_id;
         $members->name = $request->name;
         $members->address = $request->address;
         $members->birth_date = $request->birth_date;
@@ -108,7 +109,8 @@ class MemberController extends Controller
         $users->password = Hash::make($request->password);
         $users->role = 'member';
         $users->save();
-
+        
+        $members->student_id = $request->student_id;
         $members->name = $request->name;
         $members->address = $request->address;
         $members->birth_date = $request->birth_date;
