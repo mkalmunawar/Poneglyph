@@ -13,6 +13,6 @@ class HeadBorrowingBook extends Model
         return $this->belongsTo('App\Employee');
     }
     public function detailBorrow(){
-        return $this->hasMany('App\DetailBorrowingBook');
+        return $this->hasMany('App\DetailBorrowingBook', 'id');
     }
 }

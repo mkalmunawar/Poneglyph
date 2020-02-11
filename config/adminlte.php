@@ -234,8 +234,16 @@ return [
             'active' => [
                 'catalogs',
                 'catalogs/*',
+                'borrows/create',
+            ],
+        ],
+        [
+            'text' => 'Data Peminjaman',
+            'url'  => 'borrows',
+            'icon' => 'nav-icon fas fa-fw fa-book-open',
+            'active' => [
                 'borrows',
-                'borrows/*',
+                'borrows/show',
             ],
         ],
     ],

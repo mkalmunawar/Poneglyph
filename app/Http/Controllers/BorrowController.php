@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\DetailBorrowingBook;
 use App\Employee;
+use App\HeadBorrowingBook;
 use App\Members;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 
 class BorrowController extends Controller
 {
@@ -17,7 +20,7 @@ class BorrowController extends Controller
      */
     public function index()
     {
-        //
+        return view('borrow.index');
     }
 
     /**
@@ -42,7 +45,27 @@ class BorrowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $head = new HeadBorrowingBook;
+        $book = $request->book_id;
+        
+        $today = date("Y-m-d");
+        $returnDate = date("Y-m-d", strtotime($today. ' + 7 days'));
+        $head->borrowing_date = $today;
+        $head->return_date = $returnDate;
+        $head->member_id = $request->student_id;
+        $head->employee_id = $request->employee_id;
+        $head->total = count($book);
+        $head->status = 'Dalam Peminjaman';
+        $head->save();
+        
+        for ($index=0; $index < count($book); $index++) { 
+            $detail = new DetailBorrowingBook;
+            $detail->head_id = $head->id;
+            $detail->book_id = $book[$index];
+            $detail->save();
+        }
+
+        return redirect('borrows/create');
     }
 
     /**
@@ -53,7 +76,9 @@ class BorrowController extends Controller
      */
     public function show($id)
     {
-        //
+        $heads = HeadBorrowingBook::with('member', 'employee')->where('id', $id)->get();
+        $details = DetailBorrowingBook::with('book')->where('head_id', $id)->get();
+        return view('borrow.show', compact('heads', 'details'));
     }
 
     /**
@@ -96,5 +121,27 @@ class BorrowController extends Controller
 
     public function bookData($isbn){
         return Book::where('isbn', $isbn)->get();
+    }
+
+    public function borrowData(){
+        return DataTables::of(HeadBorrowingBook::with('member')->get())
+        ->addColumn('action', function($borrows){
+                if(date_diff(date_create(date("Y-m-d")), date_create($borrows->return_date))->format("%R%a") == -1){
+                    return '
+                    <a href="/borrows/' . $borrows->id .'" class="btn btn-sm btn-default">
+                        <i class="far fa-eye"></i> Detail
+                    </a>
+                    <a href="/borrows/' . $borrows->id .'/edit" class="btn btn-sm btn-danger">
+                        <i class="fa fa-coins"></i> Bayar Denda
+                    </a>
+                    ';
+                } else{
+                    return '
+                    <a href="/borrows/' . $borrows->id .'" class="btn btn-sm btn-default">
+                        <i class="far fa-eye"></i>Detail
+                    </a>';
+                }
+        })
+        ->make(true);
     }
 }
