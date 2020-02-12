@@ -43,6 +43,14 @@ class MemberController extends Controller
     {
         $members = new Members;
         $users = new User;
+        $validateData = $request->validate([
+            "name" => "required",
+            "email" => "required:email",
+            "password" => "required",
+            "student_id" => "required",
+            "address" => "required",
+            "birth_date" => "required",
+        ]);
 
         $users->name = $request->name;
         $users->email = $request->email;
@@ -104,6 +112,14 @@ class MemberController extends Controller
         $members = Members::find($id);
         $users = User::find($members->user_id);
 
+        $validateData = $request->validate([
+            "name" => "required",
+            "email" => "required:email",
+            "password" => "required",
+            "student_id" => "required",
+            "address" => "required",
+            "birth_date" => "required",
+        ]);
         $users->name = $request->name;
         $users->email = $request->email;
         $users->password = Hash::make($request->password);

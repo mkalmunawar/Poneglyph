@@ -42,7 +42,15 @@ class EmployeeController extends Controller
     {
         $employees = new Employee;
         $users = new User;
-
+        $validateData = $request->validate([
+            "name" => "required",
+            "email" => "required:email",
+            "password" => "required",
+            "nip" => "required",
+            "address" => "required",
+            "birth_date" => "required",
+        ]);
+        
         $users->name = $request->name;
         $users->email = $request->email;
         $users->password = Hash::make($request->password);
@@ -96,6 +104,14 @@ class EmployeeController extends Controller
         $employees = Employee::find($id);
         $users = User::find($employees->user_id);
 
+        $validateData = $request->validate([
+            "name" => "required",
+            "email" => "required:email",
+            "password" => "required",
+            "nip" => "required",
+            "address" => "required",
+            "birth_date" => "required",
+        ]);
         $users->email = $request->email;
         $users->password = Hash::make($request->password);
         $users->role = 'staff';

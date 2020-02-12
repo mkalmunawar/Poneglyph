@@ -38,6 +38,10 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
+        $validateData = $request->validate([
+            "name" => "required",
+            "city" => "required",
+        ]);
         $publisher = new Publisher;
         $publisher->name = $request->name;
         $publisher->city = $request->city;
@@ -79,6 +83,10 @@ class PublisherController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validateData = $request->validate([
+            "name" => "required",
+            "city" => "required",
+        ]);
         $publisher = Publisher::find($id);
         $publisher->name = $request->name;
         $publisher->city = $request->city;
