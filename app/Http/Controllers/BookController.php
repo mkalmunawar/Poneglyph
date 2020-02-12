@@ -44,6 +44,17 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        $validateData = $request->validate([
+            "isbn" => "required",
+            "name" => "required",
+            "edition" => "required",
+            "release_date" => "required",
+            "qty" => "required",
+            "author" => "required",
+            "publisher_id" => "required",
+            "category_id" => "required",
+        ]);
+
         $book = new Book;
         $book->isbn = $request->isbn;
         $book->name = $request->name;
@@ -103,6 +114,17 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validateData = $request->validate([
+            "isbn" => "required",
+            "name" => "required",
+            "edition" => "required",
+            "release_date" => "required",
+            "qty" => "required",
+            "author" => "required",
+            "publisher_id" => "required",
+            "category_id" => "required",
+        ]);
+
         $book = Book::find($id);
         $book->isbn = $request->isbn;
         $book->name = $request->name;
