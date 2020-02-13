@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\DetailBorrowingBook;
 use App\Employee;
+use App\Forfeit;
 use App\HeadBorrowingBook;
 use App\Members;
 use Illuminate\Http\Request;
@@ -80,7 +81,7 @@ class BorrowController extends Controller
         $details = DetailBorrowingBook::with('book')->where('head_id', $id)->get();
         return view('borrow.show', compact('heads', 'details'));
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -89,7 +90,11 @@ class BorrowController extends Controller
      */
     public function edit($id)
     {
-        //
+        $heads = HeadBorrowingBook::with('member', 'employee')->where('id', $id)->get();
+        $details = DetailBorrowingBook::with('book')->where('head_id', $id)->get();
+        $forfeitPrice = 3000;
+        
+        return view('borrow.forfeit', compact('heads', 'details',  'forfeitPrice'));
     }
 
     /**
@@ -126,15 +131,26 @@ class BorrowController extends Controller
     public function borrowData(){
         return DataTables::of(HeadBorrowingBook::with('member')->get())
         ->addColumn('action', function($borrows){
-                if(date_diff(date_create(date("Y-m-d")), date_create($borrows->return_date))->format("%R%a") == -1){
-                    return '
-                    <a href="/borrows/' . $borrows->id .'" class="btn btn-sm btn-default">
-                        <i class="far fa-eye"></i> Detail
-                    </a>
-                    <a href="/borrows/' . $borrows->id .'/edit" class="btn btn-sm btn-danger">
-                        <i class="fa fa-coins"></i> Bayar Denda
-                    </a>
-                    ';
+                if(date_diff(date_create(date("Y-m-d")), date_create($borrows->return_date))->format("%R%a") < 0){
+                    if ($borrows->status == 'Sudah Di Kembalikan Dengan Denda') {
+                        return '
+                        <a href="/borrows/' . $borrows->id .'" class="btn btn-sm btn-default">
+                            <i class="far fa-eye"></i> Detail
+                        </a>
+                        <button type="button" class="btn btn-sm btn-danger disabled">
+                            <i class="fa fa-coins"></i> Sudah Membayar Denda
+                        </button>
+                        ';
+                    } else {
+                        return '
+                        <a href="/borrows/' . $borrows->id .'" class="btn btn-sm btn-default">
+                            <i class="far fa-eye"></i> Detail
+                        </a>
+                        <a href="/borrows/' . $borrows->id .'/edit" class="btn btn-sm btn-danger">
+                            <i class="fa fa-coins"></i> Bayar Denda
+                        </a>
+                        ';
+                    }
                 } else{
                     return '
                     <a href="/borrows/' . $borrows->id .'" class="btn btn-sm btn-default">
@@ -143,5 +159,19 @@ class BorrowController extends Controller
                 }
         })
         ->make(true);
+    }
+
+    public function forfeitPayment(request $request){
+        $forfeits = new Forfeit;
+        $head = HeadBorrowingBook::find($request->head_id);
+        $forfeits->head_id = $request->head_id;
+        $forfeits->total = $request->forfeit;
+        $forfeits->disburse = $request->disburse;
+        $forfeits->change = $request->change;
+        $forfeits->save();
+        $head->status = 'Sudah Di Kembalikan Dengan Denda';
+        $head->save();
+
+        return redirect('borrows');
     }
 }

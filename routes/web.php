@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/members', 'MemberController');
     Route::resource('/borrows', 'BorrowController');
     Route::get('/catalogs', 'BookController@catalog');
+    Route::post('/forfeit-payment', 'BorrowController@forfeitPayment');
 });
 
 Route::get('/publishers-data', 'PublisherController@publisherData');
